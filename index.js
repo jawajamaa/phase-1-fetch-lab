@@ -1,6 +1,18 @@
-function fetchBooks() {
-  // To pass the tests, don't forget to return your fetch!
-  
+
+function fetchBooks(books) {
+  return fetch("https://anapioficeandfire.com/api/books")
+  .then((response) => {
+    // console.log (response);
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw (`${response.status}Something went wrong, but who knows when and where...`);
+    }
+  })
+  .then((data) => {
+    // console.log(data);
+    renderBooks(data);
+  })
 }
 
 function renderBooks(books) {
@@ -15,3 +27,16 @@ function renderBooks(books) {
 document.addEventListener('DOMContentLoaded', function() {
   fetchBooks();
 });
+
+////////////
+// function allPagesAllBooks(books) {
+//   fetch("https://anapioficeandfire.com/api/books")
+//   .then((resp) => resp.json())
+//   .then((json) => console.log(json));
+//   let allPages = 0;
+//   console.log(allPages);
+//   books.forEach(allPages => allPages += books.numberOfPages());
+//   console.log(allPages);
+//   return allPages;
+// }
+// => undefined
